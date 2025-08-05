@@ -1,0 +1,1 @@
+alter table respuestas add mensaje varchar(256) not null;
