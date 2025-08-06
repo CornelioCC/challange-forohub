@@ -1,28 +1,22 @@
-package com.challenge.alura.ForoHub.domain.usuario;
+package com.challenge.alura.ForoHub.domain.perfil;
 
 
-import com.challenge.alura.ForoHub.domain.perfil.Perfil;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "usuarios")
-@Entity(name = "Usuario")
+@Table(name = "perfiles")
+@Entity(name = "Perfil")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Usuario {
+public class Perfil {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private String email;
-    private String contra;
-    //@OneToOne
-    //private Perfil perfil;
-
 }

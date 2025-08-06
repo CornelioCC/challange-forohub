@@ -3,9 +3,12 @@ package com.challenge.alura.ForoHub.domain.topicos;
 
 import com.challenge.alura.ForoHub.StatusTopico;
 import com.challenge.alura.ForoHub.domain.curso.Curso;
+import com.challenge.alura.ForoHub.domain.curso.CursoRepository;
 import com.challenge.alura.ForoHub.domain.respuesta.Respuesta;
 import com.challenge.alura.ForoHub.domain.usuario.Usuario;
+import com.challenge.alura.ForoHub.domain.usuario.UsuarioRepository;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,18 +33,21 @@ public class Topico {
     private String fechaCreacion;
     @Enumerated(EnumType.STRING)
     private StatusTopico status;
-    @Embedded
-    private Usuario autor;
-    @Embedded
+    @ManyToOne
     private Curso curso;
-    @Embedded
-    private Respuesta respuestas;
+    @OneToOne
+    private Respuesta respuesta;
+    @ManyToOne
+    private Usuario autor;
 
 
 
-
-
-
-
-
+    public Topico(@Valid DTOTopicoRegistro datosTopico, CursoRepository cursoRepository, UsuarioRepository usuarioRepository) {
+        this.titulo = datosTopico.titulo();
+        this.mensaje = datosTopico.mensaje();
+        this.curso = cursoRepository.getByNombre(datosTopico.curso());
+        this.fechaCreacion = LocalDate.now().toString();
+        this.status = StatusTopico.NO_RESUELTO;
+        this.autor = usuarioRepository.getReferenceById(datosTopico.usuario());
+    }
 }
