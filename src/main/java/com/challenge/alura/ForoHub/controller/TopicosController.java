@@ -3,11 +3,9 @@ package com.challenge.alura.ForoHub.controller;
 
 import com.challenge.alura.ForoHub.domain.curso.Curso;
 import com.challenge.alura.ForoHub.domain.curso.CursoRepository;
-import com.challenge.alura.ForoHub.domain.topico.DTOTopicoRegistro;
-import com.challenge.alura.ForoHub.domain.topico.DTOTopicoSalida;
-import com.challenge.alura.ForoHub.domain.topico.Topico;
-import com.challenge.alura.ForoHub.domain.topico.TopicosRepository;
+import com.challenge.alura.ForoHub.domain.topico.*;
 import com.challenge.alura.ForoHub.domain.usuario.UsuarioRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -47,11 +45,20 @@ public class TopicosController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DTOTopicoSalida> retornaDatosMedico(@PathVariable Long id) {
+    public ResponseEntity<DTOTopicoSalida> detallarTopico(@PathVariable Long id) {
         Topico medico = topicosRepository.getReferenceById(id);
         var datosMedico = new DTOTopicoSalida(medico);
         return ResponseEntity.ok(datosMedico);
     }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity actualizarMedico(@RequestBody @Valid DTOTopicoActualizar datosTopico, @PathVariable Long id) {
+        Topico topicoActualizar = topicosRepository.getReferenceById(id);
+        topicoActualizar.actualizar(datosTopico, cursoRepository);
+        return ResponseEntity.ok(new DTOTopicoSalida(topicoActualizar));
+    }
+
 
 
 

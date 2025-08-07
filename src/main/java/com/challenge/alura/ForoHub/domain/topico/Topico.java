@@ -55,4 +55,16 @@ public class Topico {
         this.status = StatusTopico.NO_RESUELTO;
         this.autor = usuarioRepository.getReferenceById(datosTopico.usuario());
     }
+
+    public void actualizar(DTOTopicoActualizar dtoTopicoActualizar, CursoRepository cursoRepository) {
+        if (dtoTopicoActualizar.titulo() != null){
+            this.titulo = dtoTopicoActualizar.titulo();
+        }
+        if (dtoTopicoActualizar.curso() != null){
+            this.curso = cursoRepository.getByNombre(dtoTopicoActualizar.curso());
+        }
+        if (dtoTopicoActualizar.mensaje() != null){
+            this.mensaje = dtoTopicoActualizar.mensaje();
+        }
+    }
 }
