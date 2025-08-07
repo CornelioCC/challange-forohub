@@ -34,13 +34,7 @@ public class TopicosController {
 
     @GetMapping
     public ResponseEntity<List<DTOTopicoSalida>> listaTopicos(@PageableDefault(size = 2)Pageable paginacion){
-
-        Curso c = new Curso(null, "Spring Boot 3", "Desarrollo Web");
-        cursoRepository.save(c);
-        System.out.println(c);
-
         return ResponseEntity.ok((topicosRepository.findAll().stream().map(DTOTopicoSalida::new).toList()));
-
     }
 
     @PostMapping
@@ -48,7 +42,17 @@ public class TopicosController {
         Topico topic = topicosRepository.save(new Topico(datosTopico, cursoRepository, usuarioRepository));
         DTOTopicoSalida salida =  new DTOTopicoSalida(topic);
         URI url = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(salida.id()).toUri();
-        return ResponseEntity.created(url).body(salida);
 
+        return ResponseEntity.created(url).body(salida);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DTOTopicoSalida> retornaDatosMedico(@PathVariable Long id) {
+        Topico medico = topicosRepository.getReferenceById(id);
+        var datosMedico = new DTOTopicoSalida(medico);
+        return ResponseEntity.ok(datosMedico);
+    }
+
+
+
 }

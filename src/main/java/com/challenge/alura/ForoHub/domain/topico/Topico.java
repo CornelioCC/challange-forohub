@@ -9,6 +9,7 @@ import com.challenge.alura.ForoHub.domain.usuario.Usuario;
 import com.challenge.alura.ForoHub.domain.usuario.UsuarioRepository;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,13 +29,17 @@ public class Topico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private String titulo;
+    @NotNull
     private String mensaje;
     private String fechaCreacion;
     @Enumerated(EnumType.STRING)
     private StatusTopico status;
+    @NotNull
     @ManyToOne
     private Curso curso;
+    @NotNull
     @ManyToOne
     private Usuario autor;
     @OneToMany
