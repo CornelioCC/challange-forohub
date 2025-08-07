@@ -1,15 +1,15 @@
 package com.challenge.alura.ForoHub.controller;
 
 
+import com.challenge.alura.ForoHub.domain.curso.Curso;
 import com.challenge.alura.ForoHub.domain.curso.CursoRepository;
-import com.challenge.alura.ForoHub.domain.topicos.DTOTopicoRegistro;
-import com.challenge.alura.ForoHub.domain.topicos.DTOTopicoSalida;
-import com.challenge.alura.ForoHub.domain.topicos.Topico;
-import com.challenge.alura.ForoHub.domain.topicos.TopicosRepository;
+import com.challenge.alura.ForoHub.domain.topico.DTOTopicoRegistro;
+import com.challenge.alura.ForoHub.domain.topico.DTOTopicoSalida;
+import com.challenge.alura.ForoHub.domain.topico.Topico;
+import com.challenge.alura.ForoHub.domain.topico.TopicosRepository;
 import com.challenge.alura.ForoHub.domain.usuario.UsuarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +35,10 @@ public class TopicosController {
     @GetMapping
     public ResponseEntity<List<DTOTopicoSalida>> listaTopicos(@PageableDefault(size = 2)Pageable paginacion){
 
+        Curso c = new Curso(null, "Spring Boot 3", "Desarrollo Web");
+        cursoRepository.save(c);
+        System.out.println(c);
+
         return ResponseEntity.ok((topicosRepository.findAll().stream().map(DTOTopicoSalida::new).toList()));
 
     }
@@ -45,7 +49,6 @@ public class TopicosController {
         DTOTopicoSalida salida =  new DTOTopicoSalida(topic);
         URI url = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(salida.id()).toUri();
         return ResponseEntity.created(url).body(salida);
-
 
     }
 }

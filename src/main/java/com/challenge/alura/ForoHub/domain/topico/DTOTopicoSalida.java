@@ -1,4 +1,4 @@
-package com.challenge.alura.ForoHub.domain.topicos;
+package com.challenge.alura.ForoHub.domain.topico;
 
 public record DTOTopicoSalida(
         Long id,

@@ -1,9 +1,8 @@
 package com.challenge.alura.ForoHub.domain.respuesta;
 
 
-import com.challenge.alura.ForoHub.domain.topicos.Topico;
+import com.challenge.alura.ForoHub.domain.topico.Topico;
 import com.challenge.alura.ForoHub.domain.usuario.Usuario;
-import com.challenge.alura.ForoHub.domain.usuario.UsuarioRepository;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -11,7 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Table(name = "respuestas")
-@Entity(name = "Respuesta")
+@Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,6 +21,7 @@ public class Respuesta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String mensaje;
+    @ManyToOne
     private Topico topico;
     private String fechaCreacion;
     @ManyToOne

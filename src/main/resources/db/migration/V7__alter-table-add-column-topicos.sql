@@ -1,1 +1,0 @@
-alter table respuestas add topico SERIAL references topicos(id);

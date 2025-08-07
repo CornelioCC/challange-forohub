@@ -1,4 +1,4 @@
-package com.challenge.alura.ForoHub.domain.topicos;
+package com.challenge.alura.ForoHub.domain.topico;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

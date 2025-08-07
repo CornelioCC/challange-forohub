@@ -1,4 +1,4 @@
-package com.challenge.alura.ForoHub.domain.topicos;
+package com.challenge.alura.ForoHub.domain.topico;
 
 
 import com.challenge.alura.ForoHub.StatusTopico;
@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Table(name = "topicos")
-@Entity(name = "Topico")
+@Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,10 +35,10 @@ public class Topico {
     private StatusTopico status;
     @ManyToOne
     private Curso curso;
-    @OneToOne
-    private Respuesta respuesta;
     @ManyToOne
     private Usuario autor;
+    @OneToMany
+    private List<Respuesta> respuestas;
 
 
 

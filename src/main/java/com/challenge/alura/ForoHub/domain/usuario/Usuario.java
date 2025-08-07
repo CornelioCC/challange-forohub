@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Table(name = "usuarios")
-@Entity(name = "Usuario")
+@Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,7 +22,7 @@ public class Usuario {
     private String nombre;
     private String email;
     private String contra;
-    //@OneToOne
-    //private Perfil perfil;
+    @ManyToOne
+    private Perfil perfil;
 
 }

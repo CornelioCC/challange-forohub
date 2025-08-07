@@ -1,1 +1,0 @@
-alter table respuestas rename column fechacreacion to fecha_creacion;
