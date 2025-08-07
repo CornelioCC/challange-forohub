@@ -1,7 +1,6 @@
 package com.challenge.alura.ForoHub.controller;
 
 
-import com.challenge.alura.ForoHub.domain.curso.Curso;
 import com.challenge.alura.ForoHub.domain.curso.CursoRepository;
 import com.challenge.alura.ForoHub.domain.topico.*;
 import com.challenge.alura.ForoHub.domain.usuario.UsuarioRepository;
@@ -53,11 +52,19 @@ public class TopicosController {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity actualizarMedico(@RequestBody @Valid DTOTopicoActualizar datosTopico, @PathVariable Long id) {
+    public ResponseEntity actualizarTopico(@RequestBody @Valid DTOTopicoActualizar datosTopico, @PathVariable Long id) {
         Topico topicoActualizar = topicosRepository.getReferenceById(id);
         topicoActualizar.actualizar(datosTopico, cursoRepository);
         return ResponseEntity.ok(new DTOTopicoSalida(topicoActualizar));
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity eliminarTopico(@PathVariable Long id) {
+        topicosRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 
 
 
