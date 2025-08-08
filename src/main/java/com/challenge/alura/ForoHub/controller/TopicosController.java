@@ -30,9 +30,11 @@ public class TopicosController {
     private UsuarioRepository usuarioRepository;
 
     @GetMapping
-    public ResponseEntity<List<DTOTopicoSalida>> listaTopicos(@PageableDefault(size = 2)Pageable paginacion){
+    public ResponseEntity<List<DTOTopicoSalida>> listaTopicos(){
         return ResponseEntity.ok((topicosRepository.findAll().stream().map(DTOTopicoSalida::new).toList()));
     }
+
+
 
     @PostMapping
     public ResponseEntity<DTOTopicoSalida> registrarTopico(@RequestBody @Valid DTOTopicoRegistro datosTopico, UriComponentsBuilder uriComponentsBuilder){

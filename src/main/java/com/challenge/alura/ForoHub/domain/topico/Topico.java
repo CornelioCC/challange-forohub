@@ -1,7 +1,6 @@
 package com.challenge.alura.ForoHub.domain.topico;
 
 
-import com.challenge.alura.ForoHub.StatusTopico;
 import com.challenge.alura.ForoHub.domain.curso.Curso;
 import com.challenge.alura.ForoHub.domain.curso.CursoRepository;
 import com.challenge.alura.ForoHub.domain.respuesta.Respuesta;
